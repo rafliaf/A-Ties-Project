@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Ties</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
-    
+    <div>
+        <div id="root">
+            <div>
+                <header class="w-full bg-blue-700">
+                    <div class="container flex items-center text-white mx-auto p-5 justify-between">
+                        <div>
+                            <h3 class="font-semibold">Logo</h3>
+                        </div>
+                        <nav>
+                            <ul class="flex gap-[16px]">
+                                <li class="at-link cursor-pointer">Dashboard</li>
+                                <li class="at-link cursor-pointer">Report</li>
+                                <li class="at-link cursor-pointer">Manage</li>
+                            </ul>
+                        </nav>
+                        <div class="flex gap-[16px]">
+                            <button class="p-[8px] border-white border-[1px] rounded-full">Log in</button>
+                            <button>Sign up</button>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+    </div>
+    <script src="./src/app.js" defer></script>
+
 </body>
+
 </html>
