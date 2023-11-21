@@ -1,0 +1,21 @@
+<svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon">
+<g id="color-g">
+<rect id="Rectangle 26" x="12.4387" y="21.5536" width="1.55612" height="5.44643" rx="0.778061" fill="#DCEDB9"/>
+<rect id="Rectangle 25" x="16.3291" y="16.8852" width="2.33418" height="10.1148" rx="1.16709" fill="#DCEDB9"/>
+<path id="Ellipse 25" d="M17 10.5192C17 11.337 16.3284 12 15.5 12C14.6716 12 14 11.337 14 10.5192C14 9.70142 15.5 8 15.5 8C15.5 8 17 9.70142 17 10.5192Z" fill="#DCEDB9"/>
+</g>
+<g id="ic-diagram">
+<path id="Vector 14" d="M14.2244 20.0816L14.2244 16" stroke="#90A7AE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="Group 27">
+<path id="Vector 12" d="M9 26.3061L9 22.2245" stroke="#90A7AE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 13" d="M9 22.2245H13" stroke="#90A7AE" stroke-width="2.5"/>
+</g>
+<path id="Vector 15" d="M14.2244 16H19" stroke="#90A7AE" stroke-width="2.5"/>
+<path id="Vector 11" d="M14.2244 26.2041L14.2244 19.0612" stroke="#90A7AE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 16" d="M19 26.2041L19 16" stroke="#90A7AE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<path id="ic-rec" d="M19 27H10C5.58172 27 2 23.4183 2 19V14.5V10C2 5.58172 5.58172 2 9.99999 2H19C23.4183 2 27 5.5815 27 9.99978V14.5V19C27 23.4183 23.4183 27 19 27Z" stroke="#90A7AE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="ic-water" d="M16.5662 9.82479C16.5662 10.9547 15.5856 11.9745 14.2448 11.9745C12.9039 11.9745 11.9233 10.9547 11.9233 9.82479C11.9233 9.68006 12.017 9.31446 12.3353 8.71537C12.6298 8.16088 13.0369 7.55155 13.4652 6.97039C13.7329 6.60721 14.0018 6.26477 14.2448 5.96568C14.4878 6.26477 14.7566 6.60721 15.0243 6.97039C15.4527 7.55155 15.8597 8.16088 16.1543 8.71537C16.4725 9.31446 16.5662 9.68006 16.5662 9.82479Z" stroke="#90A7AE" stroke-width="2.5"/>
+</g>
+</svg>

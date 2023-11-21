@@ -1,0 +1,39 @@
+.sb-underline-animation {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.sb-underline-animation::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: transparent;
+    transform: scaleX(0);
+    transform-origin: 0% 100%;
+    transition: transform 0.5s ease;
+}
+
+.sb-underline-animation:hover::after {
+    transform: scaleX(1);
+    background-color: #ffffff;
+}
+
+.sb-active {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.sb-active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #ffffff;
+    transform: scaleX(1);
+}
