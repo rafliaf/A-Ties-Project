@@ -3,6 +3,8 @@ acData = [
     id: 1,
     ac: [
       {
+        id: 1,
+        isOn: 1,
         model: "AC_Midea_MSAF-05CRN2",
         status: "Good",
         timestamp: {
@@ -16,6 +18,8 @@ acData = [
         suhu: 18,
       },
       {
+        id: 2,
+        isOn: 1,
         model: "AC_Daikin_FTC_15NV14",
         status: "Good",
         timestamp: {
@@ -36,8 +40,10 @@ acData = [
     id: 2,
     ac: [
       {
+        id: 1,
+        isOn: 0,
         model: "AC_Midea_MSAF-05CRN2",
-        status: "Good",
+        status: "Bad",
         timestamp: {
           "08:00": 100,
           "09:00": 120,
@@ -49,6 +55,8 @@ acData = [
         suhu: 18,
       },
       {
+        id: 2,
+        isOn: 1,
         model: "AC_Daikin_FTC_15NV14",
         status: "Good",
         timestamp: {
@@ -69,6 +77,8 @@ acData = [
     id: 3,
     ac: [
       {
+        id: 1,
+        isOn: 1,
         model: "AC_Midea_MSAF-05CRN2",
         status: "Good",
         timestamp: {
@@ -82,6 +92,8 @@ acData = [
         suhu: 18,
       },
       {
+        id: 2,
+        isOn: 1,
         model: "AC_Daikin_FTC_15NV14",
         status: "Good",
         timestamp: {
