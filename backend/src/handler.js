@@ -38,7 +38,7 @@ exports.getNotesById = (req, res) => {
 
 //Mengubah data AC
 exports.updateAC = (req, res) => {
-  res.send("Update Data AC");
+  res.send("Update Data AC berdasarkan ID");
 };
 
 // Menghapus data AC
