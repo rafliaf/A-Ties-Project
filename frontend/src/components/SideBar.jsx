@@ -60,11 +60,11 @@ const SideLink = ({ img, text, to }) => {
 
   return (
     <Link
-      className='flex gap-[7px] items-center text-white cursor-pointer hover:opacity-60'
+      className='flex gap-[10px] items-center text-white cursor-pointer hover:opacity-60'
       to={to}
     >
       <img src={img} alt={text} />
-      <p className={`text-[14px] sb-underline-animation ${active}`}>{text}</p>
+      <p className={`text-[18px] sb-underline-animation ${active}`}>{text}</p>
     </Link>
   );
 };
