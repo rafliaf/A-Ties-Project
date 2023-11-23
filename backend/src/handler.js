@@ -1,6 +1,14 @@
 const data = require("./data/data");
 const { getSumCost } = require("./functions");
 
+data.forEach((it) => {
+  if (it.id === 1) {
+    console.log(it);
+    it.name = "Ruang Dosen";
+    console.log(it);
+  }
+});
+
 exports.getAllData = (req, res) => {
   res.send(data);
 };
