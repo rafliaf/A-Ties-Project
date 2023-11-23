@@ -4,8 +4,8 @@ const handler = require("./handler");
 const routes = express.Router();
 
 // routes and handler ruangan
-routes.get("/room", handler.getAllData);
-routes.get("/room/:id", handler.getRoomById);
+routes.get("/rooms", handler.getAllData);
+routes.get("/rooms/:id", handler.getRoomById);
 routes.get("/report/", handler.getSumReport);
 
 // CATATAN LAPORAN
