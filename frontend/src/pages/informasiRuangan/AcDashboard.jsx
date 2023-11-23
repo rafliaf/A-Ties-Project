@@ -9,7 +9,7 @@ import {
   CategoryScale,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 import SideBar from '../../components/SideBar';
 import DateTimeDisplay from '../../components/DateTimeDisplay';
@@ -32,22 +32,24 @@ const AcDashboard = ({ acData }) => {
 
   const cardItemList = [
     {
-        id: 1,
-        title: 'Status',
-        content: state.ac.status,
+      id: 1,
+      title: 'Status',
+      content: state.ac.status,
+      to: '/ac-dashboard/service',
     },
     {
-        id: 2,
-        title: 'Service',
-        content: state.ac.lastService,
+      id: 2,
+      title: 'Service',
+      content: state.ac.lastService,
+      to: '/ac-dashboard/service',
     },
     {
-        id: 3,
-        title: 'Riwayat Perawatan',
-        content: state.ac.lastService,
-    }
-]
-  console.log(state.ac);
+      id: 3,
+      title: 'Riwayat Perawatan',
+      content: state.ac.lastService,
+      to: '/ac-dashboard/service',
+    },
+  ];
 
   const _data = {
     labels,
@@ -79,7 +81,14 @@ const AcDashboard = ({ acData }) => {
           />
           <div className='flex gap-[32px]'>
             {cardItemList.map((it) => {
-                return <DashBoardCard key={it.id} title={it.title} content={it.content}/>
+              return (
+                <DashBoardCard
+                  key={it.id}
+                  title={it.title}
+                  content={it.content}
+                  to={it.to}
+                />
+              );
             })}
           </div>
         </div>
@@ -88,17 +97,19 @@ const AcDashboard = ({ acData }) => {
   );
 };
 
-const DashBoardCard = ({title, content}) => {
+const DashBoardCard = ({ title, content, to }) => {
   return (
-    <div className='flex flex-col shadow-md p-[22px] flex-1 h-[240px] gap-4 cursor-pointer'>
-      <div>
-        <h3 className='font-semibold'>{title}</h3>
+    <Link to={to} className='flex flex-1'>
+      <div className='flex flex-col shadow-md p-[22px] flex-1 h-[240px] gap-4 cursor-pointer'>
+        <div>
+          <h3 className='font-semibold'>{title}</h3>
+        </div>
+        <div className='flex gap-[8px] items-center'>
+          <div className={`rounded-[50%] bg-[#B8E115] w-[12px] h-[12px]`}></div>
+          <p>{content}</p>
+        </div>
       </div>
-      <div className='flex gap-[8px] items-center'>
-      <div className={`rounded-[50%] bg-[#B8E115] w-[12px] h-[12px]`}></div>
-        <p>{content}</p>
-      </div>
-    </div>
+    </Link>
   );
 };
 

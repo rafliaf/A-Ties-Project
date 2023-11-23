@@ -36,7 +36,7 @@ const InformasiRuangan = () => {
             <h1 className='font-medium text-[40px] uppercase'>
               Informasi Ruangan
             </h1>
-            <div className='flex flex-wrap gap-[34px] items-center w-[115vh] mx-auto'>
+            <div className='flex flex-wrap gap-[34px] items-center w-[130vh] mx-auto'>
               {_dataRuangan.map((it) => {
                 return (
                   <InformasiRuanganCard
