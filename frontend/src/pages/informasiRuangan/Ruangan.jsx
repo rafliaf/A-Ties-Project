@@ -64,7 +64,7 @@ const RuanganCard = ({ ac }) => {
     return total += it;
   }, 0);
 
-  const indicatorBg = ac.status === 'Good' ? 'bg-[#B8E115]' : 'bg-[#E11515]';
+  const indicatorBg = ac.status === 'Normal' ? 'bg-[#B8E115]' : 'bg-[#E11515]';
 
   return (
     <div

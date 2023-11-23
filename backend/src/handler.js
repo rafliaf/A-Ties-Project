@@ -1,13 +1,6 @@
 const data = require("./data/data");
 const { getSumCost } = require("./functions");
 
-data.forEach((it) => {
-  if (it.id === 1) {
-    console.log(it);
-    it.name = "Ruang Dosen";
-    console.log(it);
-  }
-});
 
 exports.getAllData = (req, res) => {
   res.send(data);
@@ -33,6 +26,34 @@ exports.getSumReport = (req, res) => {
 exports.getAllNotes = (req, res) => {
   res.send("Mengambil Semua Catatan");
 };
+
+exports.getAllTimestamps = (req, res) => {
+  const [id, idAc] = Object.values(req.params).map(it => {
+    return Number(it);
+  });
+
+  data.forEach(it => {
+    // cek ruangan yg id nya samae dengan id dari param
+    if (it.id === Number(id)) {
+      // cek ac yang idnya sama dengan acId dari param
+      it.ac.forEach(itAc => {
+        if (itAc.id === Number(idAc)) {
+          res.send(itAc.timestamp)
+
+        }
+      })
+    }
+  });
+
+  // kirim responsed jika tidak ada data ditemukan
+  res.send({message: "Tidak ditemukn"})
+}
+
+exports.postNote = (req, res) => {
+  console.log(req.body);
+
+  data.push()
+}
 
 // Menambah catatan
 exports.addNotes = (req, res) => {

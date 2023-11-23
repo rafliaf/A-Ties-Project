@@ -6,6 +6,7 @@ import AturRuangan from './pages/AturRuangan';
 import Ruangan from './pages/informasiRuangan/Ruangan';
 import AcDashboard from './pages/informasiRuangan/AcDashboard';
 import ServiceTime from './pages/informasiRuangan/ServiceTime';
+import RiwayatPerawatan from './pages/informasiRuangan/RiwayatPerawatan';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path=':acId' element={<Ruangan />} />
         </Route>
         <Route path='/ac-dashboard/service' element={<ServiceTime />} />
+        <Route path='/ac-dashboard/riwayat-perawatan' element={<RiwayatPerawatan />} />
       </Routes>
     </>
   );
