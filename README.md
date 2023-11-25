@@ -104,7 +104,7 @@
 - Body: JSON
 ```json
 {
-    "_id": "65616ff46e31b8b8ba48005e",
+        "_id": "65616ff46e31b8b8ba48005e",
         "isOn": true,
         "model": "AC_Midea_MSAF-05CRN2",
         "status": "Normal",
@@ -145,7 +145,7 @@
                 "tanggal": "2023-06-11T17:00:00.000Z",
                 "riwayat": "Service Rutin",
                 "catatan": "Pembersihan Filter",
-            }
+        }]
 }
 ```
 
@@ -155,7 +155,7 @@
 - Body: JSON
 ```json
 {
-    "_id": "65616ff46e31b8b8ba48005e",
+        "_id": "65616ff46e31b8b8ba48005e",
         "isOn": true,
         "model": "AC_Midea_MSAF-05CRN2",
         "status": "Normal",
