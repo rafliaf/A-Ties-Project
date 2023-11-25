@@ -9,7 +9,9 @@ import {
   CategoryScale,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import SideBar from '../../components/SideBar';
 import DateTimeDisplay from '../../components/DateTimeDisplay';
@@ -25,9 +27,43 @@ ChartJS.register(
   Legend
 );
 
-const AcDashboard = ({ acData }) => {
-  const { state } = useLocation();
+const AcDashboard = () => {
+  const [_acs, setData] = useState([]);
+  const [_display, setDisplay] = useState('hidden');
 
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
+  const idRuangan = localStorage.getItem('idRuangan');
+
+  const dropDownClick = () => {
+    const display = _display === 'hidden' ? 'flex' : 'hidden';
+    setDisplay(display);
+  };
+
+  const ddHandle = (acData) => {
+    localStorage.setItem('idAc', acData._id)
+    navigate(`/ac-dashboard/${acData._id}`, {
+      state: {
+        ac: acData
+      }
+    })
+  };
+
+  const getAcData = async () => {
+    const res = await axios({
+      method: 'get',
+      url: `http://localhost:8080/rooms/${idRuangan}`,
+      responseType: 'json',
+    });
+    setData(res.data.data.acs);
+  };
+
+  useEffect(() => {
+    getAcData();
+  }, []);
+
+  const now = new Date();
   const nextMonth = new Date(state.ac.lastService);
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   nextMonth.setMonth(nextMonth.getMonth() + 1);
@@ -38,6 +74,7 @@ const AcDashboard = ({ acData }) => {
 
   const indicatorBg =
     state.ac.status === 'Normal' ? 'bg-[#B8E115]' : 'bg-[#E11515]';
+  const dateBg = now < nextMonth ? 'bg-[#B8E115]' : 'bg-[#E11515]';
 
   const labels = Object.keys(state.ac.timestamp);
   const data = Object.values(state.ac.timestamp);
@@ -48,6 +85,7 @@ const AcDashboard = ({ acData }) => {
       title: 'Status',
       content: state.ac.status,
       to: '/ac-dashboard/service',
+      _class: 'bg-[#B8E115]',
       img: status,
     },
     {
@@ -55,6 +93,7 @@ const AcDashboard = ({ acData }) => {
       title: 'Service',
       content: state.ac.lastService,
       to: '/ac-dashboard/service',
+      _class: `${dateBg}`,
       img: service,
     },
     {
@@ -62,6 +101,7 @@ const AcDashboard = ({ acData }) => {
       title: 'Riwayat Perawatan',
       content: state.ac.lastService,
       to: '/ac-dashboard/riwayat-perawatan',
+      _class: 'bg-[#B8E115]',
       img: riwayat,
     },
   ];
@@ -80,7 +120,32 @@ const AcDashboard = ({ acData }) => {
 
   return (
     <div className='flex'>
-      <SideBar />
+      <SideBar>
+        <div className='flex flex-col w-[75%]'>
+          <div
+            className='flex items-center justify-between px-[16px] py-[8px] border rounded-full text-white text-center cursor-pointer hover:opacity-60'
+            onClick={dropDownClick}
+          >
+            <p>AC</p>
+            <p className='text-[22px]'>&#8681;</p>
+          </div>
+          <ul
+            className={`${_display} flex-col gap-[16px] w-[85%] rounded-b-md self-center bg-[#425f69] p-[12px]`}
+          >
+            {_acs.map((it) => {
+              return (
+                <li
+                onClick={() => ddHandle(it)}
+                  className='text-white cursor-pointer hover:opacity-70'
+                  key={it._id}
+                >
+                  {it.model}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </SideBar>
       <div className='flex flex-col gap-[32px] w-[80%] ml-[20%]'>
         <div className='ml-[48px] mt-[43px]'>
           <h3 className='text-[20px] font-medium'>Monitoring AC Kampus</h3>
@@ -122,7 +187,7 @@ const AcDashboard = ({ acData }) => {
                 </div>
                 <div className='flex gap-[8px] items-center'>
                   <div
-                    className={`rounded-[50%] bg-[#B8E115] w-[12px] h-[12px]`}
+                    className={`rounded-[50%] ${dateBg} w-[12px] h-[12px]`}
                   ></div>
                   <li>
                     Service Selanjutnya:{' '}
@@ -139,6 +204,7 @@ const AcDashboard = ({ acData }) => {
                   key={it.id}
                   title={it.title}
                   content={it.content}
+                  _class={it._class}
                   to={it.to}
                   img={it.img}
                   data={state}
@@ -152,7 +218,7 @@ const AcDashboard = ({ acData }) => {
   );
 };
 
-const DashBoardCard = ({ title, content, to, img, data }) => {
+const DashBoardCard = ({ title, content, to, img, data, _class }) => {
   return (
     <Link to={to} className='flex flex-1' state={data}>
       <div className='flex flex-col shadow-md p-[22px] flex-1 h-[240px] gap-4 cursor-pointer hover:opacity-60'>
@@ -161,7 +227,7 @@ const DashBoardCard = ({ title, content, to, img, data }) => {
           <h3 className='font-semibold'>{title}</h3>
         </div>
         <div className='flex gap-[8px] items-center'>
-          <div className={`rounded-[50%] bg-[#B8E115] w-[12px] h-[12px]`}></div>
+          <div className={`rounded-[50%] ${_class} w-[12px] h-[12px]`}></div>
           <p>{content}</p>
         </div>
       </div>

@@ -17,7 +17,7 @@ const Ruangan = () => {
       responseType: 'json',
     });
 
-    setRuangan(dataRuangan.data[0].ac);
+    setRuangan(dataRuangan.data.data.acs);
   };
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Ruangan = () => {
           <h1 className='font-medium text-[40px] uppercase'>{state.name}</h1>
           <div className='flex flex-wrap gap-[34px] justify-center mx-[150px]'>
             {ruangan.map((it) => {
-              return <RuanganCard key={it.id} ac={it} />;
+              return <RuanganCard key={it._id} ac={it} />;
             })}
           </div>
         </div>
@@ -49,8 +49,8 @@ const RuanganCard = ({ ac }) => {
   const navigate = useNavigate();
 
   const onAcCardClick = () => {
-    localStorage.setItem('idAc', ac.id);
-    navigate(`/ac-dashboard/${ac.id}`, {
+    localStorage.setItem('idAc', ac._id);
+    navigate(`/ac-dashboard/${ac._id}`, {
       state: {
         ac,
       },
@@ -60,12 +60,14 @@ const RuanganCard = ({ ac }) => {
   const nextMonth = new Date(ac.lastService);
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   nextMonth.setMonth(nextMonth.getMonth() + 1);
+  const now = new Date();
 
   const totalKwh = Object.values(ac.timestamp).reduce((total, it) => {
     return total += it;
   }, 0);
 
   const indicatorBg = ac.status === 'Normal' ? 'bg-[#B8E115]' : 'bg-[#E11515]';
+  const dateBg = now < nextMonth ? 'bg-[#B8E115]' : 'bg-[#E11515]';
 
   return (
     <div
@@ -92,7 +94,7 @@ const RuanganCard = ({ ac }) => {
           <li>Status: {ac.status}</li>
         </div>
         <div className='flex gap-[8px] items-center'>
-          <div className={`rounded-[50%] bg-[#B8E115] w-[12px] h-[12px]`}></div>
+          <div className={`rounded-[50%] ${dateBg} w-[12px] h-[12px]`}></div>
           <li>Service Selanjutnya: {nextMonth.toLocaleDateString('id-ID', options)}</li>
         </div>
       </ul>

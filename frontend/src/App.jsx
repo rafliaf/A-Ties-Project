@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 
-import DashBoard from './pages/DashBoard';
 import InformasiRuangan from './pages/informasiRuangan/InformasiRuangan';
 import AturRuangan from './pages/AturRuangan';
 import Ruangan from './pages/informasiRuangan/Ruangan';
@@ -13,9 +12,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<DashBoard />} />
+        <Route path='/' element={<InformasiRuangan />} />
         <Route path='/manage' element={<AturRuangan />} />
-        <Route path='/informasi' element={<InformasiRuangan />} />
         <Route path='/ruangan/'>
           <Route path=':roomId' element={<Ruangan />} />
         </Route>

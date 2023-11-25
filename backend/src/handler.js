@@ -67,7 +67,6 @@ exports.getAllTimestamps = (req, res) => {
 }
 
 exports.postNote = (req, res) => {
-  console.log(req.body);
 
   data.push()
 }
@@ -143,7 +142,6 @@ exports.deleteAC = (req, res) => {
         status: 'Berhasil',
         message: 'Berhasil menghapus data AC!',
       });
-      console.log(data);
       return response;
     } 
   })

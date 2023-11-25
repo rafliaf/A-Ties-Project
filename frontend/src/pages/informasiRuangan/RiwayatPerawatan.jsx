@@ -11,7 +11,7 @@ const thHeads = [
     title: 'No',
   },
   {
-    title: 'Tanngal',
+    title: 'Tanggal',
   },
   {
     title: 'Riwayat',
@@ -23,23 +23,23 @@ const thHeads = [
 
 const RiwayatPerawatan = () => {
   const [page, setPage] = useState(0);
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
   const getNotesData = async () => {
-    const idRuangan = localStorage.getItem('idRuangan');
     const idAc = localStorage.getItem('idAc');
-  
+
     const res = await axios({
       method: 'get',
-      url: `http://localhost:8080/notes/ruangan/${idRuangan}/ac/${idAc}`,
+      url: `http://localhost:8080/acs/${idAc}`,
       responseType: 'json',
-    })
-    setData(res.data.notes);
-  }
+    });
+
+    setData(res.data.data.report);
+  };
 
   useEffect(() => {
     getNotesData();
-  })
+  }, []);
 
   const navigate = useNavigate();
   // 9
@@ -53,8 +53,8 @@ const RiwayatPerawatan = () => {
   const onClickAddNote = () => {
     navigate('/ac-dashboard/form-perawatan', {
       state: {
-        mode: 'add'
-      }
+        mode: 'add',
+      },
     });
   };
 
@@ -113,19 +113,26 @@ const RiwayatPerawatan = () => {
                       <tr
                         className='hover:bg-[#f5f5f5] transition-all duration-300 cursor-pointer'
                         key={i}
-                        onClick={() => onRowClick({tanggal: it.tanggal, riwayat: it.riwayat, note: it.note})}
+                        onClick={() =>
+                          onRowClick({
+                            tanggal: it.tanggal,
+                            riwayat: it.riwayat,
+                            catatan: it.catatan,
+                            _id: it._id,
+                          })
+                        }
                       >
                         <td className='px-[12px] py-[15px] border-b border-[#ddd]'>
                           {++i}
                         </td>
-                        <td className='px-[12px] py-[15px] border-b border-[#ddd]'>
+                        <td className='px-[12px] py-[15px] border-b border-[#ddd] text-left'>
                           {it.tanggal}
                         </td>
-                        <td className='px-[12px] py-[15px] border-b border-[#ddd]'>
+                        <td className='px-[12px] py-[15px] border-b border-[#ddd] text-left'>
                           {it.riwayat}
                         </td>
-                        <td className='px-[12px] py-[15px] border-b border-[#ddd]'>
-                          {it.note}
+                        <td className='px-[12px] py-[15px] text-clip border-b border-[#ddd] text-left'>
+                          {it.catatan}
                         </td>
                       </tr>
                     );
