@@ -133,7 +133,6 @@ const AcDashboard = () => {
             className={`${_display} flex-col gap-[16px] w-[85%] rounded-b-md self-center bg-[#425f69] p-[12px]`}
           >
             {_acs.map((it) => {
-              // console.log(it);
               return (
                 <li
                 onClick={() => ddHandle(it)}

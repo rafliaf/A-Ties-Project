@@ -67,7 +67,6 @@ exports.getAllTimestamps = (req, res) => {
 }
 
 exports.postNote = (req, res) => {
-  console.log(req.body);
 
   data.push()
 }
