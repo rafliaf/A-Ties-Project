@@ -59,7 +59,7 @@
 
 ## UPDATE Data AC By ID
 - Method: `PUT`
-- Url: /acs/:id
+- Url: /acs/update?id=
 - Body: JSON
 ```json
 {
