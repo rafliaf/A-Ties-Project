@@ -5,26 +5,20 @@ import '../assets/css/SideBar.css';
 
 const sideLinks = [
   {
-    id: 1,
-    text: 'Dashboard',
-    img: navLink1,
+    text: 'Informasi Ruangan',
+    img: navLink2,
     to: '/',
   },
   {
-    id: 2,
-    text: 'Informasi Ruangan',
-    img: navLink2,
-    to: '/informasi',
-  },
-  {
-    id: 3,
-    text: 'Atur Ruangan',
+    text: 'Cumulative Report',
     img: navLink3,
     to: '/manage',
   },
 ];
 
-const SideBar = () => {
+const SideBar = ({children}) => {
+
+  const location = useLocation();
 
   return (
     <div className='fixed w-[20%] h-[100vh] bg-primary'>
@@ -37,12 +31,15 @@ const SideBar = () => {
         </Link>
         <div>
           <ul className='flex flex-col gap-[53px]'>
-            {sideLinks.map((it) => {
+            {sideLinks.map((it, i) => {
               return (
-                <SideLink key={it.id} text={it.text} img={it.img} to={it.to} />
+                <SideLink key={++i} text={it.text} img={it.img} to={it.to} />
               );
             })}
           </ul>
+        </div>
+        <div>
+            {children}
         </div>
       </div>
     </div>

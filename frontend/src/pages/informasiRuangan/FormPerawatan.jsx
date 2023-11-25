@@ -11,37 +11,49 @@ const FormPerawatan = () => {
   const [formData, setFormData] = useState({
     tanggal: '',
     riwayat: '',
-    note: '',
+    catatan: '',
   });
 
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  let buttonText = state.mode === 'add'? 'Buat Catatan' : 'Perbarui Data';
+  let buttonText = state.mode === 'add' ? 'Buat Catatan' : 'Perbarui Data';
 
   useEffect(() => {
     if (state.mode === 'edit') {
       const date = new Date(state.data.tanggal);
       date.setDate(date.getDate() + 1);
+      const { catatan, riwayat } = state.data;
 
-      setFormData({...state.data, tanggal: date.toISOString().slice(0, 10)});
+      setFormData({
+        catatan,
+        riwayat,
+        tanggal: date.toISOString().slice(0, 10),
+      });
     }
   }, []);
 
-
   const postDataApi = async (data) => {
-    const idRuangan = localStorage.getItem('idRuangan');
     const idAc = localStorage.getItem('idAc');
-    const mode = state.mode === 'add'? 'post' : 'put'; 
+    const mode = state.mode === 'add' ? 'post' : 'put';
 
-    const res = await axios({
-      method: mode,
-      url: `http://localhost:8080/notes/ruangan/${idRuangan}/ac/${idAc}`,
-      data: data,
-    });
+    const url =
+      state.mode === 'add'
+        ? `http://localhost:8080/report/`
+        : `http://localhost:8080/report/update?id=${state.data._id}`;
 
-    if (res.status === 200) {
-      navigate('/ac-dashboard/riwayat-perawatan');
+    try {
+      const res = await axios({
+        method: mode,
+        url: url,
+        data: { ac_id: idAc, ...data },
+      });
+
+      if (res.status === 200) {
+        navigate('/ac-dashboard/riwayat-perawatan');
+      }
+    } catch (e) {
+      alert('Cannot post')
     }
   };
 
@@ -54,7 +66,7 @@ const FormPerawatan = () => {
   };
 
   const onCatatanChange = (e) => {
-    setFormData({ ...formData, note: e.target.value });
+    setFormData({ ...formData, catatan: e.target.value });
   };
 
   const addNoteHandle = (e) => {
@@ -109,7 +121,7 @@ const FormPerawatan = () => {
               <textarea
                 className='py-[12px] h-[170px] pl-[24px] pr-[14px] border border-[#D1D1D1] rounded-md'
                 onChange={onCatatanChange}
-                value={formData.note}
+                value={formData.catatan}
                 id='noreArea'
               />
             </div>

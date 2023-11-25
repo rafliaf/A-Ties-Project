@@ -16,7 +16,7 @@ const InformasiRuangan = () => {
       responseType: 'json',
     });
 
-    setDataRuangan(dataRuangan.data);
+    setDataRuangan(dataRuangan.data.data);
   };
 
   useEffect(() => {
@@ -40,10 +40,10 @@ const InformasiRuangan = () => {
               {_dataRuangan.map((it) => {
                 return (
                   <InformasiRuanganCard
-                    key={it.id}
-                    name={it.name}
-                    acs={it.ac}
-                    id={it.id}
+                    key={it._id}
+                    name={it.namaRuangan}
+                    acs={it.acs}
+                    id={it._id}
                   />
                 );
               })}
@@ -55,7 +55,7 @@ const InformasiRuangan = () => {
   );
 };
 
-const InformasiRuanganCard = ({ name, acs, id }) => {
+const InformasiRuanganCard = ({ name, acs=[], id }) => {
   const navigate = useNavigate();
 
   const onInformasiClick = () => {
@@ -77,7 +77,7 @@ const InformasiRuanganCard = ({ name, acs, id }) => {
         {acs.map((it) => {
           return (
             <AcListCard
-              key={it.id}
+              key={it._id}
               status={it.status}
               isOn={it.isOn}
               modelName={it.model}

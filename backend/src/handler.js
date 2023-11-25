@@ -143,7 +143,6 @@ exports.deleteAC = (req, res) => {
         status: 'Berhasil',
         message: 'Berhasil menghapus data AC!',
       });
-      console.log(data);
       return response;
     } 
   })
