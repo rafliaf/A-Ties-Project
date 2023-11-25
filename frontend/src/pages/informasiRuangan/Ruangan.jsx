@@ -49,6 +49,7 @@ const RuanganCard = ({ ac }) => {
   const navigate = useNavigate();
 
   const onAcCardClick = () => {
+    localStorage.setItem('idAc', ac.id);
     navigate(`/ac-dashboard/${ac.id}`, {
       state: {
         ac,
@@ -64,7 +65,7 @@ const RuanganCard = ({ ac }) => {
     return total += it;
   }, 0);
 
-  const indicatorBg = ac.status === 'Good' ? 'bg-[#B8E115]' : 'bg-[#E11515]';
+  const indicatorBg = ac.status === 'Normal' ? 'bg-[#B8E115]' : 'bg-[#E11515]';
 
   return (
     <div

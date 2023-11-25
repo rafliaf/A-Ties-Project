@@ -9,6 +9,8 @@ routes.get("/rooms/:id", handler.getRoomById);
 routes.get("/report/", handler.getSumReport);
 routes.get("/rooms/:id/ac/:idAc", handler.getAllTimestamps);
 
+routes.get('/ruangan/:id/ac/:idAc', handler.getAllTimestamps);
+
 // CATATAN LAPORAN
 // menambah catatan laporan
 routes.post("/notes/add/:id/:idAc", handler.addNotes);

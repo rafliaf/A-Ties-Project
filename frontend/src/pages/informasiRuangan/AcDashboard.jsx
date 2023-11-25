@@ -13,6 +13,7 @@ import { useLocation, Link } from 'react-router-dom';
 
 import SideBar from '../../components/SideBar';
 import DateTimeDisplay from '../../components/DateTimeDisplay';
+import { status, service, riwayat } from '../../assets/images/images';
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +28,17 @@ ChartJS.register(
 const AcDashboard = ({ acData }) => {
   const { state } = useLocation();
 
+  const nextMonth = new Date(state.ac.lastService);
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+  const totalKwh = Object.values(state.ac.timestamp).reduce((total, it) => {
+    return (total += it);
+  }, 0);
+
+  const indicatorBg =
+    state.ac.status === 'Normal' ? 'bg-[#B8E115]' : 'bg-[#E11515]';
+
   const labels = Object.keys(state.ac.timestamp);
   const data = Object.values(state.ac.timestamp);
 
@@ -36,18 +48,21 @@ const AcDashboard = ({ acData }) => {
       title: 'Status',
       content: state.ac.status,
       to: '/ac-dashboard/service',
+      img: status,
     },
     {
       id: 2,
       title: 'Service',
       content: state.ac.lastService,
       to: '/ac-dashboard/service',
+      img: service,
     },
     {
       id: 3,
       title: 'Riwayat Perawatan',
       content: state.ac.lastService,
-      to: '/ac-dashboard/service',
+      to: '/ac-dashboard/riwayat-perawatan',
+      img: riwayat,
     },
   ];
 
@@ -71,14 +86,52 @@ const AcDashboard = ({ acData }) => {
           <h3 className='text-[20px] font-medium'>Monitoring AC Kampus</h3>
           <DateTimeDisplay />
         </div>
-        <div className='flex flex-col gap-[52px] h-[50vh] w-[1280px] mx-auto'>
-          <Line
-            className='shadow-md px-[32px] py-[20px]'
-            height='200px'
-            width='200px'
-            options={{ maintainAspectRatio: false }}
-            data={_data}
-          />
+        <div className='flex flex-col gap-[52px] w-[1280px] mx-auto'>
+          <div className='flex h-[50vh] shadow-md'>
+            <div className='w-[75%]'>
+              <Line
+                className='px-[32px] py-[20px]'
+                height='200px'
+                options={{ maintainAspectRatio: false }}
+                data={_data}
+              />
+            </div>
+            <div className='flex flex-col gap-4'>
+              <h3 className='font-semibold'>{state.ac.model}</h3>
+              <ul className='flex self-start flex-col gap-[12px]'>
+                <div className='flex gap-[8px] items-center'>
+                  <div
+                    className={`rounded-[50%] bg-[#B8E115] w-[12px] h-[12px]`}
+                  ></div>
+                  <li>
+                    Suhu: {state.ac.suhu}
+                    <sup>o</sup>C
+                  </li>
+                </div>
+                <div className='flex gap-[8px] items-center'>
+                  <div
+                    className={`rounded-[50%] bg-[#B8E115] w-[12px] h-[12px]`}
+                  ></div>
+                  <li>Total Pengunaan: {totalKwh} Kwh</li>
+                </div>
+                <div className='flex gap-[8px] items-center'>
+                  <div
+                    className={`rounded-[50%] ${indicatorBg} w-[12px] h-[12px]`}
+                  ></div>
+                  <li>Status: {state.ac.status}</li>
+                </div>
+                <div className='flex gap-[8px] items-center'>
+                  <div
+                    className={`rounded-[50%] bg-[#B8E115] w-[12px] h-[12px]`}
+                  ></div>
+                  <li>
+                    Service Selanjutnya:{' '}
+                    {nextMonth.toLocaleDateString('id-ID', options)}
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
           <div className='flex gap-[32px]'>
             {cardItemList.map((it) => {
               return (
@@ -87,6 +140,8 @@ const AcDashboard = ({ acData }) => {
                   title={it.title}
                   content={it.content}
                   to={it.to}
+                  img={it.img}
+                  data={state}
                 />
               );
             })}
@@ -97,11 +152,12 @@ const AcDashboard = ({ acData }) => {
   );
 };
 
-const DashBoardCard = ({ title, content, to }) => {
+const DashBoardCard = ({ title, content, to, img, data }) => {
   return (
-    <Link to={to} className='flex flex-1'>
-      <div className='flex flex-col shadow-md p-[22px] flex-1 h-[240px] gap-4 cursor-pointer'>
-        <div>
+    <Link to={to} className='flex flex-1' state={data}>
+      <div className='flex flex-col shadow-md p-[22px] flex-1 h-[240px] gap-4 cursor-pointer hover:opacity-60'>
+        <div className='flex gap-[8px] items-center'>
+          <img className='w-[18px]' src={img} alt={title} />
           <h3 className='font-semibold'>{title}</h3>
         </div>
         <div className='flex gap-[8px] items-center'>
