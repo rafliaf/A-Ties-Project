@@ -59,6 +59,7 @@ const InformasiRuanganCard = ({ name, acs, id }) => {
   const navigate = useNavigate();
 
   const onInformasiClick = () => {
+    localStorage.setItem('idRuangan', id);
     navigate(`/ruangan/${id}`, {
       state: {
         name,

@@ -9,12 +9,13 @@ import { service } from '../../assets/images/images';
 const ServiceTime = () => {
   const { state: {ac} } = useLocation();
   
+  const now = new Date();
   const serviceDate = new Date(ac.lastService);
   const nextService = new Date(serviceDate.setMonth(serviceDate.getMonth() + 1));
 
   const tileClassName = ({ date, view }) => {
     if (date.toLocaleString() === nextService.toLocaleString()) {
-      if (date > nextService) {
+      if (now > nextService) {
         return 'bg-[#E11515] text-white';
       }
       return 'bg-[#B8E115] text-white';

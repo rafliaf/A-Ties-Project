@@ -7,3 +7,4 @@ export {default as service} from './service.svg';
 export {default as status} from './status.svg';
 export {default as riwayat} from './riwayat.svg';
 export {default as add} from './add.svg';
+export {default as form} from './form.svg';

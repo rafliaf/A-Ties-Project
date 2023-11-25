@@ -49,6 +49,7 @@ const RuanganCard = ({ ac }) => {
   const navigate = useNavigate();
 
   const onAcCardClick = () => {
+    localStorage.setItem('idAc', ac.id);
     navigate(`/ac-dashboard/${ac.id}`, {
       state: {
         ac,
