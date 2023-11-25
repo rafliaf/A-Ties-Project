@@ -5,7 +5,7 @@
 
 ## POST Data AC
 - Method: `POST`
-- Url: /acs
+- Url: http://localhost:8080/acs
 - Body: JSON
 ```json
 {
