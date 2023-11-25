@@ -196,7 +196,7 @@
                 "tanggal": "2023-06-11T17:00:00.000Z",
                 "riwayat": "Service Rutin",
                 "catatan": "Pembersihan Filter",
-            }
+            }]
 }
 ```
 
