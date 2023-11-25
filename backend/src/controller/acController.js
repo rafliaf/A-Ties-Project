@@ -21,7 +21,7 @@ const getAC = async (req, res) => {
 const getACById = async (req, res) => {
   let response = null;
   try {
-    const ac = await AC.findOne({ _id: req.params.id });
+    const ac = await AC.findOne({ _id: req.params.id }).populate("report");
 
     response = new Response.Success(false, null, ac);
     res.status(httpStatus.OK).json(response);
